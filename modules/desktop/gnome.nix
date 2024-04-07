@@ -8,8 +8,8 @@ in
   config = mkIf (cfg == "gnome") {
     services.xserver = {
       enable = true;
-      layout = "br";
-      xkbVariant = "";
+      xkb.layout = "br";
+      xkb.variant = "";
       desktopManager.gnome.enable = true;
       displayManager.gdm.enable = true;
 
