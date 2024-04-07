@@ -1,3 +1,5 @@
+# tudo que for sudo a nivel de sistema
+
 { config, pkgs, inputs, ... }:
 {
   imports = [ # Include the results of the hardware scan.
@@ -7,27 +9,28 @@
       ../common/global
       ../../modules/desktop
       ../../modules/vm.nix
-      ../../modules/solaar-logitech.nix
-      ../../modules/yubikey-access.nix
-      ../../modules/lact-radeon.nix
+     # ../../modules/solaar-logitech.nix
+     # ../../modules/yubikey-access.nix
+     #  ../../modules/lact-radeon.nix
     ];
 
 
-  claud = {
-    desktop = "hyprland";
+  wasosky = {
+    desktop = "gnome";
   };
 
   services = {
 
-    yubikeyAccess.enable = true;
-    lact.enable = true;
+    yubikeyAccess.enable = false; # TODO what's this
+    lact.enable = false;          # TODO what's this
     solaarLogitech.enable = false;
 
     openssh.enable = true;
 
+    # TODO test later
     jellyfin = {
-      enable = true;
-      user = "nclaud";
+      enable = false;
+      user = "wasa";
       openFirewall = true;
     };
 
@@ -55,7 +58,8 @@
       enableSSHSupport = true;
     };
 
-    fish.enable = true;
+    fish.enable = false;
+    zsh.enable = true;
   };
 
   virtualisation = { 
@@ -66,7 +70,7 @@
   };
 
   environment = {
-    shells = with pkgs; [ bash fish ];
+    shells = with pkgs; [ bash zsh ];
 
     systemPackages = with pkgs; [
       vim 
@@ -81,19 +85,19 @@
 
 
   networking = {
-    hostName = "inix"; # Define your hostname.
-    networkmanager.enable = false;
+    hostName = "wasosky-nixos"; # Define your hostname.
+    networkmanager.enable = true;
     useDHCP = true;
   };
 
   users = {
-    defaultUserShell = pkgs.fish;
+    defaultUserShell = pkgs.zsh;
 
-    users.nclaud = {
+    users.wasa = {
       isNormalUser = true;
-      description = "nclaud";
+      description = "wasa";
       extraGroups = [ "networkmanager" "wheel" ];
-      shell = pkgs.fish;
+      shell = pkgs.zsh;
       packages = with pkgs; [
       ];
     };
@@ -137,7 +141,7 @@
     };
 
     users = {
-      "nclaud" = import ../../home-manager/home.nix;
+      "wasa" = import ../../home-manager/home.nix;
     };
   };
 
@@ -158,7 +162,7 @@
       settings = {
         experimental-features = [ "nix-command" "flakes" "repl-flake" ];
         auto-optimise-store = true;
-        trusted-users = [ "nclaud" ];
+        trusted-users = [ "wasa" ];
       };
     };
 }

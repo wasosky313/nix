@@ -10,7 +10,7 @@ in
   # Enable dconf (System Management Tool) programs.dconf.enable = true;
 
     # Add user to libvirtd group
-    users.users.nclaud.extraGroups = [ "libvirtd" ];
+    users.users.wasa.extraGroups = [ "libvirtd" ];
 
     # Install necessary packages
     environment.systemPackages = with pkgs; [

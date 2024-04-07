@@ -1,7 +1,7 @@
 {config, lib, ...}:
 with lib;
 let 
-  cfg = config.claud.desktop;
+  cfg = config.wasosky.desktop;
 in 
 {
 
@@ -14,7 +14,7 @@ in
       displayManager.gdm.enable = true;
 
     # TODO set video driver based on config
-      videoDrivers = ["amdgpu"];
+      videoDrivers = ["intel"];
     
     };
 
@@ -27,7 +27,7 @@ in
       alsa.support32Bit = true;
       pulse.enable = true;
       # If you want to use JACK applications, uncomment this
-      #jack.enable = true;
+      jack.enable = true;
 
       # use the example session manager (no others are packaged yet so this is enabled by default,
       # no need to redefine it in your config for now)

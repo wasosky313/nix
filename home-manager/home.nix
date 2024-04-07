@@ -16,12 +16,12 @@ in
   ];
 
   home = {
-    username = "nclaud";
-    homeDirectory = "/home/nclaud";
+    username = "wasa";
+    homeDirectory = "/home/wasa";
   };
 
   desktops.hyprland = {
-    enable = lib.mkIf (osConfig.claud.desktop == "hyprland") true;
+    enable = lib.mkIf (osConfig.wasosky.desktop == "hyprland") true;
     wallpaper = ../wallpapers/wallpaper1.jpg;
   };
 

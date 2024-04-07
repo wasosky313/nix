@@ -1,7 +1,7 @@
 {pkgs, config, lib, ...}:
 with lib;
 let 
-  cfg = config.claud.desktop;
+  cfg = config.wasosky.desktop;
   bluetoothEnabled = config.hardware.bluetooth.enable;
 in 
 {
@@ -35,7 +35,7 @@ in
         displayManager.lightdm.enable = false;
 
         # TODO set video driver based on config
-        videoDrivers = ["amdgpu"];
+        videoDrivers = ["intel"];
 
       };
 

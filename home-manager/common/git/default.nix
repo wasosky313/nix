@@ -4,7 +4,7 @@
     userName = "Bruno Claudino";
     userEmail = "bruarrais@gmail.com";
     signing = {
-      key = "70BB68EF03BF0AAF";
+      key = "70BB68EF03BF0AAF"; # TODO where can I take this key
       signByDefault = true;
     };
     aliases = {
