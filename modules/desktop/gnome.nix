@@ -20,10 +20,10 @@ in
 
     environment.systemPackages = with pkgs; [
       pinentry
-      pinentry-gnome
+      pinentry-gnome3
       gnome.gnome-tweaks
       gnome-extension-manager
-      gnomeExtensions.browser-gnome-extension
+      gnomeExtensions.bowser-gnome-extension
     ];
 
     sound.enable = true;
