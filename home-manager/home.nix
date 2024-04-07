@@ -32,7 +32,7 @@ in
   home.packages = with pkgs; [ 
     aichat
     bottom
-    chromium
+    google-chrome
     firefox
     foliate
     idea-community-fhs
