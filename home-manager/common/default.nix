@@ -2,12 +2,12 @@
 {
     imports = [
         ./direnv
-        ./fish
+        # ./fish
         ./git
         ./nvim
-        ./vscodium
-        ./zellij
+        # ./vscodium
+        # ./zellij
         ./foot
-        ./kotlin
+        # ./kotlin
     ];
 }

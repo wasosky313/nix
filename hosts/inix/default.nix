@@ -59,14 +59,14 @@
     };
 
     fish.enable = false;
-    zsh.enable = true;
+    zsh.enable = true;  # TODO meaby in user level is better
   };
 
   virtualisation = { 
 
     docker.enable = true;
 
-    libvirtd.enable = false;
+    libvirtd.enable = true;
   };
 
   environment = {

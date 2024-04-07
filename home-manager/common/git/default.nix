@@ -1,10 +1,10 @@
 {...}: {
   programs.git = {
     enable = true;
-    userName = "Bruno Claudino";
-    userEmail = "bruarrais@gmail.com";
+    userName = "Andy Jimenez Reyes";
+    userEmail = "andy.reyes@solfacil.com.br";
     signing = {
-      key = "70BB68EF03BF0AAF"; # TODO where can I take this key
+      key = "FD81D97B9A199BD0";
       signByDefault = true;
     };
     aliases = {

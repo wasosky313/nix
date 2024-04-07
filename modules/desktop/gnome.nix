@@ -1,4 +1,4 @@
-{config, lib, ...}:
+{config, lib, pkgs, ...}:
 with lib;
 let 
   cfg = config.wasosky.desktop;
@@ -8,7 +8,7 @@ in
   config = mkIf (cfg == "gnome") {
     services.xserver = {
       enable = true;
-      layout = "us";
+      layout = "br";
       xkbVariant = "";
       desktopManager.gnome.enable = true;
       displayManager.gdm.enable = true;
@@ -17,6 +17,14 @@ in
       videoDrivers = ["intel"];
     
     };
+
+    environment.systemPackages = with pkgs; [
+      pinentry
+      pinentry-gnome
+      gnome.gnome-tweaks
+      gnome-extension-manager
+      gnomeExtensions.browser-gnome-extension
+    ]
 
     sound.enable = true;
     hardware.pulseaudio.enable = false;
