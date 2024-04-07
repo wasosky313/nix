@@ -9,9 +9,9 @@
       ../common/global
       ../../modules/desktop
       ../../modules/vm.nix
-     # ../../modules/solaar-logitech.nix
-     # ../../modules/yubikey-access.nix
-     #  ../../modules/lact-radeon.nix
+      ../../modules/solaar-logitech.nix
+      ../../modules/yubikey-access.nix
+      ../../modules/lact-radeon.nix
     ];
 
 
@@ -87,7 +87,7 @@
   networking = {
     hostName = "wasosky-nixos"; # Define your hostname.
     networkmanager.enable = true;
-    useDHCP = true;
+    useDHCP = false;
   };
 
   users = {
