@@ -104,6 +104,18 @@
   };
 
 
+  # TODO change to specific module
+  # VirtualBox configs
+  # virtualisation.libvirtd.enable = true;
+  # programs.virt-manager.enable = true;
+  # virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "wasa" ];
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  virtualisation.virtualbox.guest.enable = true;
+  virtualisation.virtualbox.guest.x11 = true;
+
+
   time.timeZone = "America/Sao_Paulo";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
