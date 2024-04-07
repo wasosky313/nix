@@ -24,7 +24,7 @@ in
       gnome.gnome-tweaks
       gnome-extension-manager
       gnomeExtensions.browser-gnome-extension
-    ]
+    ];
 
     sound.enable = true;
     hardware.pulseaudio.enable = false;
