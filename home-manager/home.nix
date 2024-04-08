@@ -47,9 +47,11 @@ in
     logseq
     mpv
     postman
-    pycharm-community-fhs
+    # pycharm-community-fhs
+    jetbrains.pycharm-professional
     unison-ucm
-    vscode-fhs 
+    vscode-fhs
+    qbittorrent
   ];
 
   # Nicely reload system units when changing configs

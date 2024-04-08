@@ -29,7 +29,7 @@
 
     # TODO test later
     jellyfin = {
-      enable = false;
+      enable = true;
       user = "wasa";
       openFirewall = true;
     };
