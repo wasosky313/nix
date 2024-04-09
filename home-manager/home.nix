@@ -48,11 +48,39 @@ in
     mpv
     postman
     # pycharm-community-fhs
-    jetbrains.pycharm-professional
+    # jetbrains.pycharm-professional
     unison-ucm
     vscode-fhs
     qbittorrent
+    terminator
+    telegram-desktop
+    spotify
+    dbeaver
+    thefuck
   ];
+  
+  programs.zsh = { # mover para outra pasta 
+    enable = true;
+    enableCompletion = true;
+    # enableAutosuggestions = true; # TODO ver se mudou
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+
+    shellAliases = {
+      ll = "ls -l";
+      update-flake = "sudo nixos-rebuild switch --flake .#inix";
+    };
+    history.size = 10000;
+    history.path = "${config.xdg.dataHome}/zsh/history";
+
+    oh-my-zsh = {
+    enable = true;
+    plugins = [ "git" "thefuck" ];
+    theme = "robbyrussell";
+    };
+   };
+
+ ####################
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

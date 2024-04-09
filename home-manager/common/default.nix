@@ -5,7 +5,7 @@
         # ./fish
         ./git
         ./nvim
-        # ./vscodium
+        ./vscodium
         # ./zellij
         ./foot
         # ./kotlin
