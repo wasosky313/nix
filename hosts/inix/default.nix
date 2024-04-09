@@ -76,6 +76,8 @@
       vim 
       wget
       pciutils
+      lsof
+      neofetch
     ];
 
     variables = {
