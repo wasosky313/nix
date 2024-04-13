@@ -57,7 +57,12 @@ in
     spotify
     dbeaver
     thefuck
+    flameshot
+    sublime
+    ngrok
+    mockoon
   ];
+
   
   programs.zsh = { # mover para outra pasta 
     enable = true;

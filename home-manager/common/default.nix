@@ -9,5 +9,6 @@
         # ./zellij
         ./foot
         # ./kotlin
+        # ./sunctl # TODO why does not work?
     ];
 }

@@ -49,6 +49,8 @@
       # TODO add secrets
       # joinNetworks = [];
     };
+    
+    flatpak.enable = true;
 
   };
 
@@ -78,6 +80,7 @@
       pciutils
       lsof
       neofetch
+      gparted
     ];
 
     variables = {
