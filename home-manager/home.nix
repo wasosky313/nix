@@ -48,7 +48,7 @@ in
     mpv
     postman
     # pycharm-community-fhs
-    # jetbrains.pycharm-professional
+    jetbrains.pycharm-professional
     unison-ucm
     vscode-fhs
     qbittorrent
