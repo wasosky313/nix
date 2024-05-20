@@ -23,7 +23,6 @@ in
       pinentry-gnome3
       gnome.gnome-tweaks
       gnome-extension-manager
-      gnomeExtensions.bowser-gnome-extension
     ];
 
     sound.enable = true;

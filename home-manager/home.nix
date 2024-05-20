@@ -57,10 +57,10 @@ in
     spotify
     dbeaver
     thefuck
-    flameshot
     sublime
     ngrok
     mockoon
+    autojump
   ];
 
   
@@ -80,7 +80,7 @@ in
 
     oh-my-zsh = {
     enable = true;
-    plugins = [ "git" "thefuck" ];
+    plugins = [ "git" "thefuck" "autojump"];
     theme = "robbyrussell";
     };
    };
