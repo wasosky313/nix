@@ -50,7 +50,7 @@
       plenary-nvim
 
     ];
-    extraPackages = with pkgs; [ nil elixir-ls lua-language-server kotlin-language-server nodePackages.pyright ];
+    extraPackages = with pkgs; [ nil elixir-ls lua-language-server kotlin-language-server pyright ];
   };
 
   xdg.configFile."nvim/init.lua".text = ''
