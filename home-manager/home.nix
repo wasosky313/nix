@@ -55,7 +55,6 @@ in
     terminator
     telegram-desktop
     spotify
-    dbeaver
     thefuck
     sublime
     ngrok
