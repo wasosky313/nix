@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 {
   imports = [ # Include the results of the hardware scan.
       inputs.home-manager.nixosModules.default
@@ -31,7 +31,7 @@
     openssh.enable = true;
 
     jellyfin = {
-      enable = false;
+      enable = true;
       user = "wasa";
       openFirewall = true;
     };
@@ -50,6 +50,14 @@
       # To remove networks, use the ZeroTier CLI: zerotier-cli leave <network-id>
       # TODO add secrets
       # joinNetworks = [];
+    };
+
+    openvpn = {
+      servers = {
+        nord_vpn_udp_78 = {
+          config =  "config /home/wasa/Documents/VPN/ovpn_br/UDP/br78.nordvpn.com.udp.ovpn";
+        };
+      };
     };
 
   };
