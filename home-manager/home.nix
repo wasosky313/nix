@@ -16,12 +16,12 @@ in
   ];
 
   home = {
-    username = "nclaud";
-    homeDirectory = "/home/nclaud";
+    username = "wasa";
+    homeDirectory = "/home/wasa";
   };
 
   desktops.hyprland = {
-    enable = lib.mkIf (osConfig.claud.desktop == "hyprland") true;
+    enable = lib.mkIf (osConfig.wasosky.desktop == "hyprland") true;
     wallpaper = ../wallpapers/wallpaper1.jpg;
   };
 
@@ -33,23 +33,23 @@ in
     aichat
     bottom
     chromium
+    google-chrome
     firefox
     foliate
-    idea-community-fhs
-    insomnia
+    #idea-community-fhs
     #jetbrains.idea-community
     #jetbrains.pycharm-community
     jq
     lazydocker
     lazygit
     libreoffice
-    librewolf
-    logseq
+    # logseq
     mpv
     postman
-    pycharm-community-fhs
-    unison-ucm
-    vscode-fhs 
+    scrcpy
+    nemo
+    # grim # to take screen-shot TODO relocate
+    # slurp # TODO relocate
   ];
 
   # Nicely reload system units when changing configs

@@ -1,7 +1,7 @@
 {pkgs, config, lib, ...}:
 with lib;
 let 
-  cfg = config.claud.desktop;
+  cfg = config.wasosky.desktop;
   bluetoothEnabled = config.hardware.bluetooth.enable;
 in 
 {
@@ -21,6 +21,9 @@ in
     };
 
     services = {
+        # TODO something is enabling this option
+      displayManager.sddm.enable = false;
+
       xserver = {
         enable = true;
 
@@ -29,20 +32,17 @@ in
           variant = "";
         };
 
-        # TODO something is enabling this option
-        displayManager.gdm.enable = false;
-        displayManager.sddm.enable = false;
         displayManager.lightdm.enable = false;
+        displayManager.gdm.enable = false;
 
         # TODO set video driver based on config
-        videoDrivers = ["amdgpu"];
+        videoDrivers = ["intel"];
 
       };
 
       dbus.enable = true;
     };
 
-    sound.enable = true;
     hardware.pulseaudio ={
       enable = false;
       package = pkgs.pulseaudioFull;

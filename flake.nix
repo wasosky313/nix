@@ -10,11 +10,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     hyprwm-contrib= {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,16 +20,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    unison-nix = {
-      url = "github:ceedubs/unison-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-colors.url = "github:misterio77/nix-colors";
 
   };
 
-  outputs = { nixpkgs, home-manager, hyprland, hyprwm-contrib, unison-nix, sops-nix, ... }@inputs: let
+  outputs = { nixpkgs, home-manager, hyprwm-contrib, sops-nix, ... }@inputs: let
 
     systems = [
       "aarch64-linux"
@@ -54,6 +44,8 @@
     forEachSystem = f: nixpkgs.lib.genAttrs systems (system: f pkgsFor.${system});
 
   in {
+    packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
+    pkgs = forEachSystem (pkgs: pkgs);
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'

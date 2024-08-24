@@ -11,7 +11,7 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [ "kvm-intel" "amdgpu" ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   # testing
@@ -20,22 +20,29 @@
   };
 
   boot.loader.systemd-boot.enable = true;
-  systemd.tmpfiles.rules = ["L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"];
+  # systemd.tmpfiles.rules = ["L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"];
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/f01f3e8f-3856-453d-ba4a-b7ea2946faa3";
+    { device = "/dev/disk/by-uuid/ad1b2244-294d-43cb-8c53-c3210f6090c7";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/1608-C117";
+    { device = "/dev/disk/by-uuid/2164-F544";
       fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/70f9727e-b325-4f8f-be6c-c00d54b1ddba"; }
-    ];
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/b47d20c3-70b2-4933-ae7c-a7a95f0f439c";
+      fsType = "ext4";
+    };
+
+  swapDevices = [ ];
+
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -51,16 +58,15 @@
   
   # AMD GPU
   hardware = {
-    opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-      extraPackages = with pkgs; [ 
-        amdvlk
-        libva
-        libvdpau-va-gl
-        rocm-opencl-icd
-        rocm-opencl-runtime
+    keyboard.qmk.enable = true;
+    # graphics = {
+      # enable = true;
+      # extraPackages = with pkgs; [ 
+        # amdvlk
+        # libva
+        # libvdpau-va-gl
+        # rocm-opencl-icd
+        # rocm-opencl-runtime
         #rocmPackages.clr
         #rocmPackages.clr.icd
         #rocmPackages.hipblas
@@ -70,16 +76,16 @@
         #rocmPackages.rocm-smi
         #rocmPackages.rocsolver
         #rocmPackages.rocsparse
-        vaapiVdpau
-      ];
-    };
+        # vaapiVdpau
+      # ];
+    # };
 
-    bluetooth.enable = false;
+    bluetooth.enable = true;
     bluetooth.powerOnBoot = true;
   };
 
   # current 6600m doesn't support default gfx1032 afaik
-  environment.variables = { HSA_OVERRIDE_GFX_VERSION="10.3.0"; };
+  # environment.variables = { HSA_OVERRIDE_GFX_VERSION="10.3.0"; };
 
 }
 

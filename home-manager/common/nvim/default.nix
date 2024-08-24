@@ -1,11 +1,11 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [ fzf unzip clang ripgrep fd cargo clang luajit nil nodejs xclip unison-ucm gnumake ];
+  home.packages = with pkgs; [ fzf unzip clang ripgrep fd cargo clang luajit nil nodejs xclip gnumake ];
 
   home.sessionVariables = {
     EDITOR="nvim";
   };
 
-  programs.neovim= {
+  programs.neovim = {
     enable = true;
     defaultEditor = true;
     plugins = with pkgs.vimPlugins; [
@@ -14,8 +14,6 @@
       #lsp and treesitter
       nvim-lspconfig
       nvim-cmp
-      kotlin-vim
-      #(nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
       nvim-treesitter.withAllGrammars
       nvim-treesitter-context
       nvim-treesitter-endwise
@@ -28,8 +26,9 @@
       fidget-nvim
       luasnip
       vim-nix
-      unison
       elixir-tools-nvim
+
+      nvim-autopairs
 
       # not sure about mason
       #mason-lspconfig-nvim
@@ -49,8 +48,14 @@
       telescope-file-browser-nvim
       plenary-nvim
 
+      #File explorer and navigation
+      oil-nvim
+      grapple-nvim
+
+      nvim-web-devicons
     ];
-    extraPackages = with pkgs; [ nil elixir-ls lua-language-server kotlin-language-server nodePackages.pyright ];
+
+    extraPackages = with pkgs; [ nil elixir-ls lua-language-server basedpyright zls];
   };
 
   xdg.configFile."nvim/init.lua".text = ''
@@ -146,6 +151,7 @@
   -- Enable `lukas-reineke/indent-blankline.nvim`
   -- For version 3, see :help ibl.setup()
   -- See `:help indent_blankline.txt`
+  require("ibl").setup()
   
   -- Gitsigns
   -- See `:help gitsigns.txt`
@@ -158,6 +164,9 @@
       changedelete = { text = '~' },
     },
   }
+  
+  -- [[ Configure Autopairs ]]
+  require('nvim-autopairs').setup()
 
   -- [[ Configure Telescope ]]
   -- See `:help telescope` and `:help telescope.setup()`
@@ -171,6 +180,18 @@
       },
     },
   }
+
+  -- OIL NVIM
+  require("oil").setup()
+  vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+  -- Grapple
+  vim.keymap.set("n", "<leader>m", require("grapple").toggle)
+  vim.keymap.set("n", "<leader>M", "<cmd>Telescope grapple tags<cr>")
+
+  -- User command
+  vim.keymap.set("n", "<leader>1", "<cmd>Grapple select index=1<cr>")
+  require("telescope").load_extension("grapple")
 
   -- Enable telescope fzf native, if installed
   pcall(require('telescope').load_extension, 'fzf')
@@ -331,6 +352,7 @@
       end,
     },
     mapping = cmp.mapping.preset.insert {
+      ['<C-y>'] = cmp.mapping.confirm { select = true },
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
@@ -360,17 +382,20 @@
     sources = {
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
+      { name = 'path' },
     },
   }
+
+  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+  cmp.event:on(
+    'confirm_done',
+    cmp_autopairs.on_confirm_done()
+    )
 
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 
   local lspc = require'lspconfig'
-
-  lspc.unison.setup{
-    on_attach = on_attach,
-  }
 
   lspc.nil_ls.setup{
     on_attach = on_attach,
@@ -395,7 +420,8 @@
       capabilities = capabilities,
     },
   })
-
+  
+  lspc.gleam.setup{}
 
   lspc.ocamllsp.setup{
     on_attach = on_attach,
@@ -408,17 +434,20 @@
     capabilities = capabilities,
   }
 
-  lspc.kotlin_language_server.setup{
-    cmd = { "${pkgs.kotlin-language-server}/bin/kotlin-language-server" },
-    filetypes = {"kotlin"},
+  lspc.basedpyright.setup{
+    cmd = { "${pkgs.basedpyright}/bin/basedpyright-langserver", "--stdio" },
     on_attach = on_attach,
-    capabilities = capabilities,
+    settings = {
+      basedpyright = {
+        analysis = {
+          typeCheckingMode = "standard"
+        }
+      }
+    }
   }
 
-  lspc.pyright.setup{
-    cmd = { "${pkgs.pyright}/bin/pyright-langserver", "--stdio" },
+  lspc.zls.setup{
     on_attach = on_attach,
-    capabilities = capabilities,
   }
   '';
 }
