@@ -1,7 +1,7 @@
 {config, lib, ...}:
 with lib;
 let 
-  cfg = config.claud.desktop;
+  cfg = config.wasosky.desktop;
 in 
 {
 
@@ -14,11 +14,10 @@ in
       displayManager.gdm.enable = true;
 
     # TODO set video driver based on config
-      videoDrivers = ["amdgpu"];
+      videoDrivers = ["intel"];
     
     };
 
-    sound.enable = true;
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {

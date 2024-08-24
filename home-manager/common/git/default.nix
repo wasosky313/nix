@@ -1,10 +1,10 @@
 {...}: {
   programs.git = {
     enable = true;
-    userName = "Bruno Claudino";
-    userEmail = "bruarrais@gmail.com";
+    userName = "Andy Jimenez Reyes";
+    userEmail = "wasosky313@gmail.com";
     signing = {
-      key = "70BB68EF03BF0AAF";
+      key = "839F81F7210FA5D1";
       signByDefault = true;
     };
     aliases = {

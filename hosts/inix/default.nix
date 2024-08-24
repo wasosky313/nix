@@ -13,9 +13,14 @@
     ];
 
 
-  claud = {
+  wasosky = {
     desktop = "hyprland";
   };
+
+  # sops.defaultSopsFile = ../../secrets/secrets.yaml;
+  # sops.defaultSopsFormat = "yaml";
+  # sops.age.keyFile = "/home/wasa/.config/sops/age/keys.txt";
+  # sops.secrets.github-token = { };
 
   services = {
 
@@ -26,8 +31,8 @@
     openssh.enable = true;
 
     jellyfin = {
-      enable = true;
-      user = "nclaud";
+      enable = false;
+      user = "wasa";
       openFirewall = true;
     };
 
@@ -41,7 +46,7 @@
     };
 
     zerotierone = {
-      enable = true;
+      enable = false;
       # To remove networks, use the ZeroTier CLI: zerotier-cli leave <network-id>
       # TODO add secrets
       # joinNetworks = [];
@@ -62,7 +67,7 @@
 
     docker.enable = true;
 
-    libvirtd.enable = false;
+    libvirtd.enable = true;
   };
 
   environment = {
@@ -89,9 +94,9 @@
   users = {
     defaultUserShell = pkgs.fish;
 
-    users.nclaud = {
+    users.wasa = {
       isNormalUser = true;
-      description = "nclaud";
+      description = "wasa";
       extraGroups = [ "networkmanager" "wheel" ];
       shell = pkgs.fish;
       packages = with pkgs; [
@@ -137,7 +142,7 @@
     };
 
     users = {
-      "nclaud" = import ../../home-manager/home.nix;
+      "wasa" = import ../../home-manager/home.nix;
     };
   };
 
@@ -158,7 +163,8 @@
       settings = {
         experimental-features = [ "nix-command" "flakes" "repl-flake" ];
         auto-optimise-store = true;
-        trusted-users = [ "nclaud" ];
+        trusted-users = [ "wasa" ];
+        # access-tokens = [ config.sops.secrets.github-token.path ];
       };
     };
 }

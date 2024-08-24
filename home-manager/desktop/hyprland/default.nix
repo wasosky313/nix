@@ -49,7 +49,7 @@ in {
 
      # not well configured dependencies (should not be at PATH IMO)
      #wayland stuff
-     home.packages = with pkgs; [ gnome.nautilus pavucontrol wl-clipboard mako grimblast hyprpaper cliphist wl-clip-persist pamixer ];
+     home.packages = with pkgs; [ nautilus pavucontrol wl-clipboard mako grimblast hyprpaper cliphist wl-clip-persist pamixer ];
 
      home.pointerCursor = {
        gtk.enable = true;
@@ -67,7 +67,7 @@ in {
         };
 
         iconTheme = {
-          package = pkgs.gnome.adwaita-icon-theme;
+          package = pkgs.adwaita-icon-theme;
           name = "Adwaita";
         };
 
@@ -89,12 +89,12 @@ in {
      wallpaper = ,${cfg.wallpaper}
      '';
 
-     # screensharing
+     #screensharing
      xdg.portal = {
        enable = true;
        extraPortals = [ 
          pkgs.xdg-desktop-portal-hyprland 
-         pkgs.xdg-desktop-portal-gtk
+         # pkgs.xdg-desktop-portal-gtk
        ];
        configPackages = [ pkgs.hyprland ];
      };
@@ -271,11 +271,11 @@ in {
           "bar" = {
             layer = "top";
             position = "top";
-            height = 50;
+            height = 30;
             width = null;
             exclusive = true;
             passthrough = false;
-            spacing = 4;
+            spacing = 3;
             margin = null;
             fixed-center = true;
             ipc = false;
@@ -365,29 +365,30 @@ in {
      wayland.windowManager.hyprland.enable = true;
      wayland.windowManager.hyprland.systemd.enable = true;
      wayland.windowManager.hyprland.settings = {
-       windowrulev2 = [
-         "forceinput,class:^(jetbrains-.*),title:^Select Methods to Override"
-         "windowdance,class:^(jetbrains-.*)"
-       ];
+       # windowrulev2 = [
+         # "forceinput,class:^(jetbrains-.*),title:^Select Methods to Override"
+         # "windowdance,class:^(jetbrains-.*)"
+       # ];
 
        bind = [
          "${mod},P,exec,${grimblastBin} --notify copy output"
          "${modshift}, P, exec, ${grimblastBin} --notify copy area"
-         "${mod}, T, exec, foot"
-         "${mod}, B, exec, firefox"
-         "${mod}, C, killactive,"
-         "${mod}, E, exec, nautilus"
+         "${mod}, W, exec, foot"
+         "${mod}, B, exec, chromium"
+         "${mod}, A, exec, google-chrome-stable"
+         "${mod}, X, killactive,"
+         "${mod}, E, exec, nemo"
          "${mod}, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
          "${mod}, S, exec, wofi --show drun"
-         "${mod}, O, togglesplit," # dwindle
          "${mod}, F, fullscreen"
 
          "${mod}, l, movefocus, l"
          "${mod}, h, movefocus, r"
          "${mod}, k, movefocus, u"
          "${mod}, j, movefocus, d"
-         "${mod}, N, workspace, 1"
-         "${mod}, M, workspace, 2"
+         "${mod}, O, workspace, 1"
+         "${mod}, N, workspace, 2"
+         "${mod}, M, workspace, 3"
 
        ] ++ workspaces;
 
@@ -402,12 +403,14 @@ in {
          "hyprpaper"
          "wl-paste --type text --watch cliphist store"
          "wl-paste --type image --watch cliphist store"
+         "exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+
        ];
 
        input = {
 
          kb_layout = "us,br";
-         kb_options = "grp:alt_space_toggle";
+         kb_options = "grp:alt_space_toggle,caps:swapescape";
 
          follow_mouse = 1;
          mouse_refocus = false;
