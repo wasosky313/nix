@@ -51,6 +51,8 @@ in
     # grim # to take screen-shot TODO relocate
     # slurp # TODO relocate
     jetbrains.idea-community
+    appimage-run
+    spotify
   ];
 
   # Nicely reload system units when changing configs
