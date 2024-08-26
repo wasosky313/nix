@@ -47,10 +47,12 @@ in
     mpv
     postman
     scrcpy
-    nemo
+    nemo-with-extensions # TODO move to alone dir
+    nemo-fileroller
     # grim # to take screen-shot TODO relocate
     # slurp # TODO relocate
     jetbrains.idea-community
+    vscode-fhs
     appimage-run
     spotify
   ];
