@@ -100,6 +100,9 @@ in {
      };
 
      programs = {
+      hyprlock = {
+        enable = true;
+      };
 
        wofi = {
          enable = true;
@@ -382,7 +385,7 @@ in {
          "${mod}, S, exec, wofi --show drun"
          "${mod}, F, fullscreen"
 
-         "${mod}, l, movefocus, l"
+         "${mod}, l, exec, hyprlock"
          "${mod}, h, movefocus, r"
          "${mod}, k, movefocus, u"
          "${mod}, j, movefocus, d"
