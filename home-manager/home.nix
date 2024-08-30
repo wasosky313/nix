@@ -55,6 +55,9 @@ in
     vscode-fhs
     appimage-run
     spotify
+    jetbrains.pycharm-professional
+    telegram-desktop
+    beekeeper-studio
   ];
 
   # Nicely reload system units when changing configs
